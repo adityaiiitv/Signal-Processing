@@ -1,0 +1,61 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{algorithm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{algpseudocode}
+\usepackage{url}
+% Title Page
+\title{Topics in Signal Processing\\Lab - 01}
+\author{Gaurav Yadav\\ ID : 201351029}
+
+\begin{document}
+\maketitle
+In this problem, we have to find the graph for which the new vector or mapped vector have the minimum number of zeros.
+So, for this we first generate random graph of 6 vertices. As there are many graph having 6 vertices and also different kind of 
+graph like complete graph, cyclic etc. Now the graph of 6 vertices will have number of edges from 6(cyclic graph) to 
+15(complete graph). So, we are generating the graph having number of edges varying from 6 to 15.
+
+
+Below is the pseudo code for the above described thing : 
+\begin{algorithm}
+   \caption{Merge Sort}
+    \begin{algorithmic}[1]
+	\State V = given vector that need to be compressed
+	\State gcount =0
+	\Comment global count having the record of maximum number of 0's
+        \For{$i = 1$ to ${no\_iteration}$}
+          \For{$j = 6$ to $15$}
+	    
+            \State G = RandomGraph(j)
+	    \Comment generate random graph having j edges (G = adjacency matrix)
+            \If{IsConnected(G)}
+	      \State L = laplacian matrix for G
+	      \State S = eigen space of G
+	      \State U = S*V
+	      \Comment Map vector V into eigen space S
+	      \State count = \#0's in U vector
+	      
+	      \If {count > gcount}
+		\State gcount = count
+		\State ajdm = G
+	      \EndIf
+            \EndIf
+	  \EndFor  
+        \EndFor
+        \State print gcount
+        \State print adjm
+    \end{algorithmic}
+\end{algorithm}
+
+From this, we can get a adjacency matrix of a connected graph which gives the maximum compression or for which our new vector
+will have maximum number of zeros. 
+For this, I have used some open source code like to generate random graph and to check whether graph is connected or not.
+\begin{thebibliography}{9}
+\bibitem{1} 
+Octave network toolbox  
+\url{http://www.sharelatex.com} 
+\end{thebibliography}
+
+\end{document}          

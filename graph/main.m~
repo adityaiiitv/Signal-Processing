@@ -1,0 +1,54 @@
+clear all ;
+close all ;
+
+% given vector
+v = [1,2,3,1,2,3];
+um = [0 0 0 0 0 0 ];
+% define the global count as 10000
+gcount = 0;
+
+%adjm will have the adjacency matrix corresponding to the graph for which we get maximum compression
+adjm = zeros(5,5);
+
+for k = 1:100
+  for i = 6:15
+  % generate random graph of vertex 6
+  adj = randomGraph(6,0.5,i);
+    %check wether graph is connected or not
+	  if (isConnected(adj))
+      % get the laplacian matrix from adj
+		  L = diag(sum(adj))-adj;
+      %find the eigen space
+      [eig_vec,eig_val] = eig(L);
+	    space = [eig_vec(:,1),eig_vec(:,2),eig_vec(:,3),eig_vec(:,4),eig_vec(:,5),eig_vec(:,6)];
+      %space
+      count = 0;
+	    a = size(v);
+	    u = space*transpose(v);
+      %u
+	   % sum(u(:)!=0)
+     %count number of zeros in the new vector
+	    for i = 1:a(2)
+        %u(i)
+		    if (u(i)<=e^(-10) && u(i) >= - e^(-10))
+        		%abs(u(i))
+            %i
+            %abs(u(i))
+			      count=count+1;
+		    endif
+	    endfor
+      %find the minimum count and respective adjacency matrix
+      if( count>gcount)
+        gcount = count;
+        adjm = adj;
+        um=u;
+      endif
+	  endif
+  endfor
+endfor
+
+printf("\nIf both the adjm and um are zero matrix and vector respectively then it means there is no graph which new vector have a single zero\n")
+
+gcount
+adjm
+um
